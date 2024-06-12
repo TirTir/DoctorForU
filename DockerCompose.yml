@@ -1,0 +1,6 @@
+version: '2'
+services:
+  discovery-service:
+    image: TirTir0827/service-discovery:test
+    ports:
+      - "8761:8761"
