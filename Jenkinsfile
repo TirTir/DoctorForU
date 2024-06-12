@@ -15,7 +15,7 @@ pipeline {
 
          stage('Build Gradle') {
             steps {
-                sh 'cd /var/lib/jenkins/workspace/doctorforu/service-discovery'
+                sh 'cd /var/lib/jenkins/workspace/main/service-discovery'
                 sh 'chmod +x gradlew'
                 sh './gradlew clean'
                 sh "./gradlew build"
