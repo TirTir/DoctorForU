@@ -1,0 +1,17 @@
+server:
+  port: 9001
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: hospital-service
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
