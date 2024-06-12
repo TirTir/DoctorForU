@@ -29,24 +29,25 @@ pipeline {
                 }
             }
         }
-        
-        stage("Build Image") {
+
+        stage("Push Image to ECR") {
             steps {
                 script {
-                    dockerImage = docker.build registry
-                    dockerImage.tag("$BUILD_NUMBER")
+                    sh '''
+                        docker build -t ${serviceDiscoveryImage} /var/lib/jenkins/workspace/jenkins/service-discovery 
+                        aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 035574589515.dkr.ecr.ap-northeast-2.amazonaws.com
+                        docker push ${serviceDiscoveryImage}
+                    '''
                 }
             }
         }
         
-        stage("Push Image") {
+        stage('Invoke Sub Pipeline') {
             steps {
-                script {
-                    sh "aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 035574589515.dkr.ecr.ap-northeast-2.amazonaws.com"
-                    sh "docker push 035574589515.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins:$BUILD_NUMBER"
-                      
-              }
-          }
-      }
+                build job: 'jenkins-sub-pipeline', parameters: [
+                    string(name: 'SERVICE_DISCOVERY_VERSION', value: "${BUILD_NUMBER}"),
+                ]
+            }
+        }
    }
 }
