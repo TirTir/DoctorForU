@@ -26,14 +26,7 @@ pipeline {
                 }
             }
         }
-        
-        stage('Clean') {
-            steps {
-                sh 'cd /var/lib/jenkins/workspace/doctorforu'
-                sh 'chmod +x gradlew'
-                sh './gradlew clean'
-            }
-        }
+
         
         stage("Build Gradle") {
             steps {
