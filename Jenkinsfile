@@ -13,7 +13,21 @@ pipeline {
             }
         }
 
-      stage('Clean') {
+         stage('Clean') {
+            steps {
+                script {
+                    def workspaceDir = "/var/lib/jenkins/workspace/jenkins"
+                    if (!fileExists(workspaceDir)) {
+                        sh "mkdir -p ${workspaceDir}"
+                    }
+                    dir(workspaceDir) {
+                        sh "pwd" // 작업 공간을 출력하여 확인
+                    }
+                }
+            }
+        }
+        
+        stage('Clean') {
             steps {
                 sh 'cd /var/lib/jenkins/workspace/doctorforu'
                 sh 'chmod +x gradlew'
