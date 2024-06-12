@@ -13,23 +13,11 @@ pipeline {
             }
         }
 
-         stage('Clean') {
+         stage('Build Gradle') {
             steps {
-                script {
-                    def workspaceDir = "/var/lib/jenkins/workspace/jenkins"
-                    if (!fileExists(workspaceDir)) {
-                        sh "mkdir -p ${workspaceDir}"
-                    }
-                    dir(workspaceDir) {
-                        sh "pwd" // 작업 공간을 출력하여 확인
-                    }
-                }
-            }
-        }
-
-        
-        stage("Build Gradle") {
-            steps {
+                sh 'cd /var/lib/jenkins/workspace/doctorforu/service-discovery'
+                sh 'chmod +x gradlew'
+                sh './gradlew clean'
                 sh "./gradlew build"
             }
         }
