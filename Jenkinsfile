@@ -24,7 +24,9 @@ pipeline {
 
          stage('Build') {
             steps {
-                sh './gradlew build'
+                dir('/var/lib/jenkins/workspace/jenkins/service-discovery'){
+                    sh './gradlew build'
+                }
             }
         }
         
