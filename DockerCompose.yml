@@ -1,6 +1,10 @@
 version: '2'
+
 services:
+
   discovery-service:
-    image: TirTir0827/service-discovery:test
+    build: doctorforu/service-discovery
     ports:
       - "8761:8761"
+    environment:
+      -SPRING_PROFILES_ACTIVE=docker
