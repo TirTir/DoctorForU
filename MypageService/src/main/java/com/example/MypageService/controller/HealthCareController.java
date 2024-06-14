@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/mypage-service")
 public class HealthCareController {
     private final HealthCareService healthService;
-    private final UserService userService;
+    //private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(HealthCareController.class);
 
     @GetMapping("/health/{userId}") // 건강 기록 가져오기 -> 사용자 id를 통해
