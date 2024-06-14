@@ -2,7 +2,9 @@ pipeline {
     agent any
     
     environment {
-        registry = "035574589515.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins"
+        imagename = "DoctorForU-${BUILD_NUMBER}"
+        registryCredential  = 'docker-hub'
+        dockerImage = ''
         serviceDiscoveryImage = "${registry}:serviceDiscovery-${BUILD_NUMBER}"
     }
     
@@ -13,31 +15,48 @@ pipeline {
             }
         }
 
-         stage('Clean') {
+        stage('Clean Gradle') {
             steps {
                 dir('/var/lib/jenkins/workspace/jenkins/service-discovery'){
                     sh 'chmod +x gradlew'
                     sh './gradlew clean'
                 }
             }
+            post {
+                failure {
+                    error 'This pipeline stops here...'
+                }
+            }
         }
 
-         stage('Build') {
+        stage('Build Gradle') {
             steps {
                 dir('/var/lib/jenkins/workspace/jenkins/service-discovery'){
                     sh './gradlew build'
                 }
             }
+            post {
+                failure {
+                    error 'This pipeline stops here...'
+                }
+            }
         }
 
-        stage("Push Image to ECR") {
+        stage("Build Docker") {
             steps {
                 script {
                     sh '''
                         docker build -t ${serviceDiscoveryImage} /var/lib/jenkins/workspace/jenkins/service-discovery 
-                        aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 035574589515.dkr.ecr.ap-northeast-2.amazonaws.com
-                        docker push ${serviceDiscoveryImage}
+                        docker.withRegistry( '', registryCredential) {
+                            dockerImage.push() 
+                        }
+                }
                     '''
+                }
+            }
+            post {
+                failure {
+                    error 'This pipeline stops here...'
                 }
             }
         }
