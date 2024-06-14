@@ -1,10 +1,10 @@
 FROM openjdk:21-jdk-slim
 WORKDIR /app
-ADD build.gradle.kts /app/
-RUN gradle build -x test --parallel --continue > /dev/null 2>&1 || true
-
 COPY . /app
-RUN gradle clean build --no-daemon
-COPY target/service-discovery-1.0.jar service-discovery.jar
 
+# Gradle 빌드
+RUN ./gradlew clean build -x test --no-daemon
+COPY build/libs/service-discovery-1.0.jar service-discovery.jar
+
+# 컨테이너 시작 명령어
 ENTRYPOINT ["java", "-jar", "service-discovery.jar"]
