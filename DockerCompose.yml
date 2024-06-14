@@ -1,10 +1,17 @@
 version: '2'
 
 services:
-
   discovery-service:
     build: doctorforu/service-discovery
+    container_name: discovery-service
     ports:
       - "8761:8761"
     environment:
-      -SPRING_PROFILES_ACTIVE=docker
+      -spring.discovery.host: discovery
+    networks:
+      ecomm:
+
+networks:
+  ecomm:
+    external: true
+    name: ecommerce-network
