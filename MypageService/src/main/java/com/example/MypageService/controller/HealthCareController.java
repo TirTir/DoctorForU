@@ -22,7 +22,7 @@ public class HealthCareController {
     //private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(HealthCareController.class);
 
-    @GetMapping("/health/{userId}") // 건강 기록 가져오기 -> 사용자 id를 통해
+    @GetMapping("/healthcare/{userId}") // 건강 기록 가져오기 -> 사용자 id를 통해
     public List<HealthResponse> getHealth(@PathVariable String userId) {
         logger.info("userId: " + userId);
         //List<HealthResponse> response = healthService.getHealth(userId);
@@ -39,7 +39,7 @@ public class HealthCareController {
 //    }
 
     // 건강 기록 작성해서 저장하는 로직 필요
-    @PostMapping("/health/register/{userId}")
+    @PostMapping("/healthcare/register/{userId}")
     public CommonResponse<String> postHealthRegister(@PathVariable String userId, @RequestBody HealthCare healthCare){
         logger.info("userId : " + userId);
         logger.info("systolic: " + healthCare.getSystolic() + "diastolic:" + healthCare.getDiastolic() + "weight: " + healthCare.getWeight());
