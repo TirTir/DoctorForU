@@ -2,6 +2,9 @@ pipeline {
     agent any
     
     environment {
+        imagename = "DoctorForU-${BUILD_NUMBER}"
+        registryCredential  = 'docker-hub'
+        dockerImage = ''
         registry = "035574589515.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins"
         serviceDiscoveryImage = "${registry}:serviceDiscovery-${BUILD_NUMBER}"
     }
@@ -13,31 +16,45 @@ pipeline {
             }
         }
 
-         stage('Clean') {
+        stage('Clean Gradle') {
             steps {
-                dir('/var/lib/jenkins/workspace/jenkins/service-discovery'){
+                dir('.'){
                     sh 'chmod +x gradlew'
                     sh './gradlew clean'
                 }
             }
-        }
-
-         stage('Build') {
-            steps {
-                dir('/var/lib/jenkins/workspace/jenkins/service-discovery'){
-                    sh './gradlew build'
+            post {
+                failure {
+                    error 'This pipeline stops here...'
                 }
             }
         }
 
-        stage("Push Image to ECR") {
+        stage('Build Gradle') {
+            steps {
+                dir('.'){
+                    sh './gradlew build'
+                }
+            }
+            post {
+                failure {
+                    error 'This pipeline stops here...'
+                }
+            }
+        }
+
+        stage("Build Docker") {
             steps {
                 script {
                     sh '''
                         docker build -t ${serviceDiscoveryImage} /var/lib/jenkins/workspace/jenkins/service-discovery 
-                        aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 035574589515.dkr.ecr.ap-northeast-2.amazonaws.com
                         docker push ${serviceDiscoveryImage}
                     '''
+                }
+            }
+            post {
+                failure {
+                    error 'This pipeline stops here...'
                 }
             }
         }
