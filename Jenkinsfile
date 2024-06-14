@@ -5,7 +5,6 @@ pipeline {
         imagename = "DoctorForU-${BUILD_NUMBER}"
         registryCredential  = 'docker-hub'
         dockerImage = ''
-        registry = "035574589515.dkr.ecr.ap-northeast-2.amazonaws.com/jenkins"
         serviceDiscoveryImage = "${registry}:serviceDiscovery-${BUILD_NUMBER}"
     }
     
@@ -48,7 +47,10 @@ pipeline {
                 script {
                     sh '''
                         docker build -t ${serviceDiscoveryImage} /var/lib/jenkins/workspace/jenkins/service-discovery 
-                        docker push ${serviceDiscoveryImage}
+                        docker.withRegistry( '', registryCredential) {
+                            dockerImage.push() 
+                        }
+                }
                     '''
                 }
             }
