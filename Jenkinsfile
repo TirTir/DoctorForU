@@ -17,7 +17,7 @@ pipeline {
 
         stage('Clean Gradle') {
             steps {
-                dir('.'){
+                dir('/var/lib/jenkins/workspace/jenkins/service-discovery'){
                     sh 'chmod +x gradlew'
                     sh './gradlew clean'
                 }
@@ -31,7 +31,7 @@ pipeline {
 
         stage('Build Gradle') {
             steps {
-                dir('.'){
+                dir('/var/lib/jenkins/workspace/jenkins/service-discovery'){
                     sh './gradlew build'
                 }
             }
