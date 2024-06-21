@@ -1,6 +1,6 @@
 server:
   port: 8000
-# 주석 달았음 
+
 eureka:
   client:
     register-with-eureka: true

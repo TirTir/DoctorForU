@@ -2,14 +2,14 @@ version: '2'
 
 services:
   discovery-service:
-    build: doctorforu/service-discovery
+    build: .
     container_name: discovery-service
     ports:
       - "8761:8761"
     environment:
-      -spring.discovery.host: discovery
+      - SPRING_DISCOVERY_HOST=discovery
     networks:
-      ecomm:
+      - ecomm
 
 networks:
   ecomm:
