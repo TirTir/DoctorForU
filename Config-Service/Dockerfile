@@ -13,7 +13,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew clean build -x test --no-daemon && ls -la build/libs
 
 # 빌드된 JAR 파일을 복사
-RUN cp build/libs/Config-Service-0.0.1-SNAPSHOT.jar Config-Service.jar
+RUN cp build/libs/config-service-0.0.1-SNAPSHOT.jar config-service.jar
 
 # 컨테이너 시작 명령어
-ENTRYPOINT ["java", "-jar", "Config-Service.jar"]
+ENTRYPOINT ["java", "-jar", "config-service.jar"]
