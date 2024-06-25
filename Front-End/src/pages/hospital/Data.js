@@ -1,0 +1,45 @@
+// 추가 진료과목 옵션
+
+export const departments = [
+  { value: "D001", label: "내과" },
+  { value: "D002", label: "소아청소년과" },
+  { value: "D003", label: "신경과" },
+  { value: "D004", label: "정신건강의학과" },
+  { value: "D005", label: "피부과" },
+  { value: "D006", label: "외과" },
+  { value: "D007", label: "흉부외과" },
+  { value: "D008", label: "정형외과" },
+  { value: "D009", label: "신경외과" },
+  { value: "D010", label: "성형외과" },
+  { value: "D011", label: "산부인과" },
+  { value: "D012", label: "안과" },
+  { value: "D013", label: "이비인후과" },
+  { value: "D014", label: "비뇨기과" },
+  { value: "D015", label: "결핵과" },
+  { value: "D016", label: "재활의학과" },
+  { value: "D017", label: "마취통증의학과" },
+  { value: "D018", label: "영상의학과" },
+  { value: "D019", label: "치료방사선과" },
+  { value: "D020", label: "임상병리과" },
+  { value: "D021", label: "해부병리과" },
+  { value: "D022", label: "가정의학과" },
+  { value: "D023", label: "핵의학과" },
+  { value: "D024", label: "응급의학과" },
+  { value: "D026", label: "치과" },
+  { value: "D037", label: "소아치과" },
+  { value: "D044", label: "한방내과" },
+];
+
+// 추가 기관 옵션
+export const institutes = [
+  { value: "A", label: "종합병원" },
+  { value: "B", label: "병원" },
+  { value: "C", label: "의원" },
+  { value: "D", label: "요양병원" },
+  { value: "E", label: "한방병원" },
+  { value: "F", label: "노인전문병원" },
+  { value: "G", label: "한의원" },
+  { value: "M", label: "치과병원" },
+  { value: "R", label: "보건소" },
+  { value: "L", label: "정신병원" },
+];

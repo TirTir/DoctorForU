@@ -1,0 +1,25 @@
+{
+  "short_name": "DoctorForU",
+  "name": "DoctorForU",
+  "icons": [
+    {
+      "src": "DoctorForU_Logo.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "DoctorForU_Logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "DoctorForU_Logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#F4F6F9",
+  "background_color": "#ffffff"
+}
