@@ -13,7 +13,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew clean build -x test --no-daemon && ls -la build/libs
 
 # 빌드된 JAR 파일을 복사
-RUN cp build/libs/service-discovery-0.0.1-SNAPSHOT.jar service-discovery.jar
+RUN cp build/libs/Hospital-Service-0.0.1-SNAPSHOT.jar Hospital-Service.jar
 
 # 컨테이너 시작 명령어
-ENTRYPOINT ["java", "-jar", "service-discovery.jar"]
+ENTRYPOINT ["java", "-jar", "Hospital-Service.jar"]
