@@ -5,10 +5,8 @@ services:
     image: tirtir0827/discovery-service:latest
     ports:
       - 8761:8761
-    environment:
-      - SPRING_DISCOVERY_HOST=discovery
     networks:
-      - ecomm
+      - ecommerce-network
 
   apigateway-service:
     image: tirtir0827/api-gateway:latest
