@@ -2,16 +2,37 @@ version: '2'
 
 services:
   discovery-service:
-    build: .
-    container_name: discovery-service
+    image: tirtir0827/discovery-service:latest
     ports:
-      - "8761:8761"
+      - 8761:8761
     environment:
       - SPRING_DISCOVERY_HOST=discovery
     networks:
       - ecomm
 
-networks:
-  ecomm:
-    external: true
-    name: ecommerce-network
+  apigateway-service:
+    image: tirtir0827/api-gateway:latest
+    ports:
+      - 8000:8000
+    networks:
+      - ecommerce-network
+
+  hospital-service:
+    image: tirtir0827/hospital-service:latest
+    ports:
+      - 9001:9001
+    environment:
+      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka/
+    networks:
+      - ecommerce-network
+
+  config-service:
+    image: tirtir0827/config-server:latest
+    ports:
+      - 8888:8888
+    networks:
+      - ecommerce-network
+
+
+  networks:
+    ecommerce-network
