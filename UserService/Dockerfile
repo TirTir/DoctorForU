@@ -16,4 +16,4 @@ RUN ./gradlew clean build -x test --no-daemon && ls -la build/libs
 RUN cp build/libs/UserService-0.0.1-SNAPSHOT.jar UserService.jar
 
 # 컨테이너 시작 명령어
-ENTRYPOINT ["java", "-jar", "service-discovery.jar"]
+ENTRYPOINT ["java", "-jar", "UserService.jar"]
