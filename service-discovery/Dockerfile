@@ -6,6 +6,9 @@ WORKDIR /app
 # 소스 코드 복사
 COPY . .
 
+# Give execute permissions to gradlew
+RUN chmod +x ./gradlew
+
 # Gradle 빌드 및 빌드 파일 위치 출력
 RUN ./gradlew clean build -x test --no-daemon && ls -la build/libs
 
